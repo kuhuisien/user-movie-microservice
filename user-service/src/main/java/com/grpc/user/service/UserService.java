@@ -7,14 +7,14 @@ import com.grpc.common.Genre;
 import com.grpc.user.UserGenreUpdateRequest;
 import com.grpc.user.UserResponse;
 import com.grpc.user.UserSearchRequest;
-import com.grpc.user.UserServiceGrpc;
+import com.grpc.user.UserServiceGrpc.UserServiceImplBase;
 import com.grpc.user.repository.UserRepository;
 
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 
 @GrpcService
-public class UserService extends UserServiceGrpc.UserServiceImplBase{
+public class UserService extends UserServiceImplBase{
 	
 	@Autowired
 	private UserRepository repository;
