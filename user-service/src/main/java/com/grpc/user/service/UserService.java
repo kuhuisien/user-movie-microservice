@@ -1,6 +1,7 @@
 package com.grpc.user.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.grpc.common.Genre;
 import com.grpc.user.UserGenreUpdateRequest;
@@ -36,9 +37,24 @@ public class UserService extends UserServiceGrpc.UserServiceImplBase{
 	}
 
 	@Override
+	@Transactional
 	public void updateUserGenre(UserGenreUpdateRequest request, StreamObserver<UserResponse> responseObserver) {
-		// TODO Auto-generated method stub
-		super.updateUserGenre(request, responseObserver);
+		String loginId = request.getLoginId();
+		
+		UserResponse.Builder userBuilder = UserResponse.newBuilder();
+		
+		this.repository.findById(loginId)
+		.ifPresent(user -> {
+			String genre = request.getGenre().toString();
+			user.setGenre(genre);
+			
+			userBuilder.setName(user.getName())
+			.setLoginId(user.getLoginId())
+			.setGenre(Genre.valueOf(user.getGenre().toUpperCase()));
+		});
+		
+		responseObserver.onNext(userBuilder.build());
+		responseObserver.onCompleted();
 	}
 
 }
