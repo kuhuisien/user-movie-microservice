@@ -28,6 +28,7 @@ public class UserMovieService {
 	private MovieServiceGrpc.MovieServiceBlockingStub movieStub;
 	
 	public List<RecommendedMovie> getUserMovieSuggestion(String loginId) {
+		System.out.println("aaa");
 		UserSearchRequest userSearchRequest = UserSearchRequest.newBuilder()
 				.setLoginId(loginId).build();
 		

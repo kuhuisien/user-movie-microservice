@@ -20,7 +20,7 @@ public class UserService extends UserServiceImplBase{
 	private UserRepository repository;
 
 	@Override
-	public void getUserGenre(UserSearchRequest request, StreamObserver<UserResponse> responseObserver) {
+	public void getUserGenre(UserSearchRequest request, StreamObserver<UserResponse> responseObserver) {		
 		String loginId = request.getLoginId();
 		
 		UserResponse.Builder userBuilder = UserResponse.newBuilder();
@@ -30,10 +30,10 @@ public class UserService extends UserServiceImplBase{
 			userBuilder.setName(user.getName())
 			.setLoginId(user.getLoginId())
 			.setGenre(Genre.valueOf(user.getGenre().toUpperCase()));
-		});;
+		});
 		
 		responseObserver.onNext(userBuilder.build());
-		responseObserver.onCompleted();
+		responseObserver.onCompleted(); 
 	}
 
 	@Override
