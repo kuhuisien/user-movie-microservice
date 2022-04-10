@@ -2,9 +2,7 @@ package com.grpc.aggregator.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Service;
-
 import com.grpc.aggregator.dto.RecommendedMovie;
 import com.grpc.aggregator.dto.UserGenre;
 import com.grpc.common.Genre;
@@ -28,7 +26,6 @@ public class UserMovieService {
 	private MovieServiceGrpc.MovieServiceBlockingStub movieStub;
 	
 	public List<RecommendedMovie> getUserMovieSuggestion(String loginId) {
-		System.out.println("aaa");
 		UserSearchRequest userSearchRequest = UserSearchRequest.newBuilder()
 				.setLoginId(loginId).build();
 		
